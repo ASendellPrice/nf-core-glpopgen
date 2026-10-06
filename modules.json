@@ -5,9 +5,34 @@
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "angsd/dosaf": {
+                        "branch": "master",
+                        "git_sha": "04b4e82738d536388aea64c61939ec41f74b24c4",
+                        "installed_by": ["modules"]
+                    },
+                    "angsd/gl": {
+                        "branch": "master",
+                        "git_sha": "05e66d91fd88db7e02d07d9b4d7469ea696d2aee",
+                        "installed_by": ["modules"]
+                    },
+                    "angsd/realsfs": {
+                        "branch": "master",
+                        "git_sha": "f0fd65736c0f9fa7ff26fad4375e4fab198efd0e",
+                        "installed_by": ["modules"]
+                    },
+                    "angsd/soapsnpcalibration": {
+                        "branch": "master",
+                        "git_sha": "2080397432fcb0d079121dbacf22ce42ef175cec",
+                        "installed_by": ["modules"]
+                    },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "008f9d3e61209bf995edac3ba531f54e269e1215",
+                        "installed_by": ["modules"]
+                    },
+                    "pcangsd/inbreeding": {
+                        "branch": "master",
+                        "git_sha": "2b9ca5c012c5eb45f03af3c43c39fadd4c684eaf",
                         "installed_by": ["modules"]
                     }
                 }
