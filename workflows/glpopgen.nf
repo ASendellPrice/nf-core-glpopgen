@@ -18,7 +18,7 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_glpo
 workflow GLPOPGEN {
 
     take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    ch_samplesheet // channel: [ val(meta), path(bam), path(bai) ] read in from --input; meta = [ id, population ]
     multiqc_config
     multiqc_logo
     multiqc_methods_description
