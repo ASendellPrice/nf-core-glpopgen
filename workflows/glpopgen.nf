@@ -3,6 +3,7 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+include { ANGSD_DOSAF            } from '../modules/nf-core/angsd/dosaf/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -28,6 +29,44 @@ workflow GLPOPGEN {
 
     def ch_versions = channel.empty()
     def ch_multiqc_files = channel.empty()
+
+    //
+    // Reference and (optional) ancestral genomes: reused by every population
+    //
+    def ch_reference = channel.value([
+        file(params.fasta, checkIfExists: true),
+        file(params.fasta_fai ?: "${params.fasta}.fai", checkIfExists: true)
+    ])
+    def ch_ancestral = params.ancestral_fasta
+        ? channel.value([
+            file(params.ancestral_fasta, checkIfExists: true),
+            file(params.ancestral_fai ?: "${params.ancestral_fasta}.fai", checkIfExists: true)
+        ])
+        : channel.value([ [], [] ])
+
+    //
+    // Group samples by population: [ meta, [ bams ], [ bais ] ]
+    //
+    def ch_population_bams = ch_samplesheet
+        .map { meta, bam, bai -> [ meta.population, meta.id, bam, bai ] }
+        .groupTuple()
+        .map { population, ids, bams, bais ->
+            [ [ id: population, population: population, samples: ids ], bams, bais ]
+        }
+
+    //
+    // MODULE: Site allele frequency likelihoods per population with ANGSD
+    //
+    ANGSD_DOSAF (
+        ch_population_bams,
+        ch_reference,
+        ch_ancestral,
+        [],                 // error_file: only needed for -GL 4
+        [],                 // inbreeding_coefficients: only needed for -doSAF 2
+        [],                 // soapsnp_calibration: only needed for -GL 3
+        params.gl_model,
+        1                   // dosaf_mode: standard (-doSAF 1)
+    )
 
     //
     // Collate and save software versions
