@@ -4,6 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { ANGSD_DOSAF            } from '../modules/nf-core/angsd/dosaf/main'
+include { BAM_TO_STRUCTURE       } from '../subworkflows/local/bam_to_structure'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -43,6 +44,35 @@ workflow GLPOPGEN {
             file(params.ancestral_fai ?: "${params.ancestral_fasta}.fai", checkIfExists: true)
         ])
         : channel.value([ [], [] ])
+
+    //
+    // All samples together, sorted by sample ID so the order (and -resume cache) is stable: [ meta, [ bams ], [ bais ] ]
+    //
+    def ch_all_bams = ch_samplesheet
+        .map { meta, bam, bai -> [ meta.id, bam, bai ] }
+        .toSortedList { a, b -> a[0] <=> b[0] }
+        .map { samples ->
+            [ [ id: 'all_samples', samples: samples.collect { s -> s[0] } ], samples.collect { s -> s[1] }, samples.collect { s -> s[2] } ]
+        }
+
+    //
+    // SUBWORKFLOW: Population structure across all samples (genotype likelihoods -> PCA, admixture)
+    //
+    BAM_TO_STRUCTURE (
+        ch_all_bams,
+        ch_reference,
+        params.admix_k_min,
+        params.admix_k_max,
+        params.admix_reps
+    )
+
+    //
+    // Sample IDs of the all-samples Beagle columns, one per line (first line = Ind0)
+    //
+    BAM_TO_STRUCTURE.out.beagle
+        .collectFile(storeDir: "${outdir}/angsd/gl_all") { meta, _beagle ->
+            [ "${meta.id}.samples.txt", meta.samples.join('\n') + '\n' ]
+        }
 
     //
     // Group samples by population: [ meta, [ bams ], [ bais ] ]

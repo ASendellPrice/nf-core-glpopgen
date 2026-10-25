@@ -102,6 +102,37 @@
                 }
             }
         },
+        "population_structure_options": {
+            "title": "Population structure options",
+            "type": "object",
+            "fa_icon": "fas fa-project-diagram",
+            "description": "Options for population structure analyses across all samples (PCAngsd, NGSadmix).",
+            "properties": {
+                "admix_k_min": {
+                    "type": "integer",
+                    "default": 2,
+                    "minimum": 1,
+                    "description": "Smallest number of ancestral populations (K) to test with NGSadmix.",
+                    "fa_icon": "fas fa-sort-numeric-down"
+                },
+                "admix_k_max": {
+                    "type": "integer",
+                    "default": 5,
+                    "minimum": 1,
+                    "description": "Largest number of ancestral populations (K) to test with NGSadmix.",
+                    "help_text": "NGSadmix runs once per replicate for every K from `--admix_k_min` to `--admix_k_max`.",
+                    "fa_icon": "fas fa-sort-numeric-up"
+                },
+                "admix_reps": {
+                    "type": "integer",
+                    "default": 3,
+                    "minimum": 1,
+                    "description": "Number of independent NGSadmix runs per K, each with a different seed.",
+                    "help_text": "Running several replicates per K helps detect runs stuck in local optima; compare the final likelihoods in the `.log` files.",
+                    "fa_icon": "fas fa-redo"
+                }
+            }
+        },
         "institutional_config_options": {
             "title": "Institutional config options",
             "type": "object",
@@ -262,6 +293,9 @@
         },
         {
             "$ref": "#/$defs/genotype_likelihood_options"
+        },
+        {
+            "$ref": "#/$defs/population_structure_options"
         },
         {
             "$ref": "#/$defs/institutional_config_options"
