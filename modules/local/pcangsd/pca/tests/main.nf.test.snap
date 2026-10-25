@@ -1,0 +1,115 @@
+{
+    "pcangsd - beagle": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FIN",
+                        "samples": [
+                            "HG00349",
+                            "HG00358",
+                            "HG00350",
+                            "HG00351"
+                        ]
+                    },
+                    "FIN.cov"
+                ]
+            ],
+            {
+                "versions_pcangsd": [
+                    [
+                        "PCANGSD_PCA",
+                        "pcangsd",
+                        "v1.36.4"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-08T10:00:05.776574",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
+    },
+    "pcangsd - beagle - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FIN",
+                            "samples": [
+                                "HG00349",
+                                "HG00358",
+                                "HG00350",
+                                "HG00351"
+                            ]
+                        },
+                        "FIN.cov:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FIN",
+                            "samples": [
+                                "HG00349",
+                                "HG00358",
+                                "HG00350",
+                                "HG00351"
+                            ]
+                        },
+                        "FIN.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        "PCANGSD_PCA",
+                        "pcangsd",
+                        "v1.36.4"
+                    ]
+                ],
+                "covariance": [
+                    [
+                        {
+                            "id": "FIN",
+                            "samples": [
+                                "HG00349",
+                                "HG00358",
+                                "HG00350",
+                                "HG00351"
+                            ]
+                        },
+                        "FIN.cov:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "FIN",
+                            "samples": [
+                                "HG00349",
+                                "HG00358",
+                                "HG00350",
+                                "HG00351"
+                            ]
+                        },
+                        "FIN.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_pcangsd": [
+                    [
+                        "PCANGSD_PCA",
+                        "pcangsd",
+                        "v1.36.4"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-08T10:00:15.280413",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
+    }
+}
