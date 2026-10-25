@@ -8,3 +8,12 @@ testing*
 *.pyc
 null/
 .lineage/
+
+# Local run settings
+demo_params*.yml
+local.config
+results_demo*/
+
+# nf-test working files
+.nf-test/
+.nf-test.log
