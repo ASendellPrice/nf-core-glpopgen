@@ -1,0 +1,148 @@
+{
+    "beagle - subset - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.beagle.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BEAGLE_SUBSET",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "beagle": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.beagle.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "samples": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.samples.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "BEAGLE_SUBSET",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-25T20:23:20.589426",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
+    },
+    "beagle - subset two of four samples": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.beagle.gz:md5,efea5830e0fb85fae35e93a82f08a1ad"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.samples.txt:md5,d2fe63e0462c7dde49e27250d45a27cf"
+                    ]
+                ],
+                "2": [
+                    [
+                        "BEAGLE_SUBSET",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ],
+                "beagle": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.beagle.gz:md5,efea5830e0fb85fae35e93a82f08a1ad"
+                    ]
+                ],
+                "samples": [
+                    [
+                        {
+                            "id": "FIN_subset",
+                            "samples": [
+                                "HG00350",
+                                "HG00349"
+                            ]
+                        },
+                        "FIN_subset.samples.txt:md5,d2fe63e0462c7dde49e27250d45a27cf"
+                    ]
+                ],
+                "versions_gawk": [
+                    [
+                        "BEAGLE_SUBSET",
+                        "gawk",
+                        "5.3.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-25T20:23:16.24128",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
+    }
+}

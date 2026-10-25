@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "beagle_subset"
+description: Extract a subset of samples from a Beagle genotype likelihood file
+keywords:
+  - beagle
+  - genotype likelihoods
+  - subset
+  - angsd
+  - genomics
+tools:
+  - "gawk":
+      description: "GNU awk, a pattern scanning and processing language"
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      licence: ["GPL v3-or-later"]
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing information about the sample subset
+          e.g. [ id:'population', population:'population', samples:'sample IDs' ]
+    - beagle_file:
+        type: file
+        description: Gzipped Beagle genotype likelihood file produced by ANGSD
+        pattern: "*.beagle.gz"
+        ontologies: []
+    - all_samples:
+        type: list
+        description: |
+          IDs of every sample in the Beagle file, in column order (first entry = Ind0)
+    - keep_samples:
+        type: list
+        description: |
+          IDs of the samples to keep. Output columns and the sample list follow this order.
+output:
+  beagle:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing information about the sample subset
+            e.g. [ id:'population', population:'population', samples:'sample IDs' ]
+      - "*.beagle.gz":
+          type: file
+          description: |
+            Gzipped Beagle file with the marker/allele columns and the kept samples,
+            renumbered Ind0..Ind(n-1) (three likelihood columns each)
+          pattern: "*.beagle.gz"
+          ontologies: []
+  samples:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing information about the sample subset
+            e.g. [ id:'population', population:'population', samples:'sample IDs' ]
+      - "*.samples.txt":
+          type: file
+          description: Sample IDs of the output Beagle columns, one per line (first line = Ind0)
+          pattern: "*.samples.txt"
+          ontologies: []
+  versions_gawk:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "gawk":
+          type: string
+          description: The name of the tool
+      - "gawk --version | sed '1!d;s/GNU Awk //;s/,.*//'":
+          type: eval
+          description: The expression to obtain the version of the tool
+topics:
+  versions:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "gawk":
+          type: string
+          description: The name of the tool
+      - "gawk --version | sed '1!d;s/GNU Awk //;s/,.*//'":
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@ASendellPrice"
+maintainers:
+  - "@ASendellPrice"
