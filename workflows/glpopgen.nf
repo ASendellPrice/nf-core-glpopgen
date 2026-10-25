@@ -3,7 +3,7 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { ANGSD_DOSAF            } from '../modules/nf-core/angsd/dosaf/main'
+include { BAM_TO_SAF             } from '../subworkflows/local/bam_to_saf'
 include { BAM_TO_STRUCTURE       } from '../subworkflows/local/bam_to_structure'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
@@ -85,17 +85,15 @@ workflow GLPOPGEN {
         }
 
     //
-    // MODULE: Site allele frequency likelihoods per population with ANGSD
+    // SUBWORKFLOW: Site allele frequency likelihoods per population with ANGSD
     //
-    ANGSD_DOSAF (
+    BAM_TO_SAF (
         ch_population_bams,
+        BAM_TO_STRUCTURE.out.beagle,
         ch_reference,
         ch_ancestral,
-        [],                 // error_file: only needed for -GL 4
-        [],                 // inbreeding_coefficients: only needed for -doSAF 2
-        [],                 // soapsnp_calibration: only needed for -GL 3
         params.gl_model,
-        1                   // dosaf_mode: standard (-doSAF 1)
+        params.saf_method
     )
 
     //
